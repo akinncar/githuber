@@ -14,7 +14,7 @@ import {
 
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
-import api from "axios";
+import api from "../../services/api";
 
 import styles from "./styles";
 
@@ -29,15 +29,12 @@ export default function Home() {
     setText("");
     Keyboard.dismiss();
 
-    const response = await api.get(
-      `https://api.github.com/search/users?q=${text}`
-    );
+    const response = await api.get(`/search/users?q=${text}`);
 
     if (response.data.incomplete_results) {
       return;
     }
 
-    console.log(response.data.items);
     setResultUsers(response.data.items);
 
     activeLoading(false);
@@ -98,12 +95,12 @@ export default function Home() {
       <StatusBar style="dark" />
 
       <View style={styles.searchContainer}>
-        <View style={styles.input}>
+        <View style={styles.inputContainer}>
           <TextInput
             onChangeText={(text) => setText(text)}
-            width={Dimensions.get("screen").width}
             value={text}
             placeholder="Search a github user"
+            style={styles.input}
           />
         </View>
 
@@ -116,7 +113,7 @@ export default function Home() {
       </View>
 
       {loading ? (
-        <ActivityIndicator />
+        <ActivityIndicator color={"#000"} />
       ) : (
         resultUsers.length > 0 && (
           <>
@@ -124,7 +121,6 @@ export default function Home() {
 
             <FlatList
               height={Dimensions.get("screen").height * 0.2}
-              width={Dimensions.get("screen").width}
               style={styles.listUsers}
               data={resultUsers}
               renderItem={renderItem}
@@ -140,7 +136,6 @@ export default function Home() {
 
           <FlatList
             height={Dimensions.get("screen").height * 0.2}
-            width={Dimensions.get("screen").width}
             style={styles.listUsers}
             data={listUsers}
             renderItem={renderItem}

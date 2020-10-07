@@ -18,17 +18,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 
-  input: {
+  inputContainer: {
     flex: 1,
     alignItems: "flex-start",
     justifyContent: "center",
     height: 40,
-    borderColor: "gray",
+    width: Dimensions.get("screen").width,
+    // borderColor: "gray",
     borderWidth: 1,
     borderRadius: 8,
-    paddingHorizontal: 12,
     marginVertical: 12,
     marginRight: 8,
+  },
+
+  input: {
+    height: 40,
+    width: "100%",
+    borderRadius: 8,
+    paddingHorizontal: 12,
   },
 
   buttonContainer: {
@@ -55,6 +62,7 @@ const styles = StyleSheet.create({
   },
 
   listUsers: {
+    width: Dimensions.get("screen").width,
     paddingHorizontal: 18,
   },
 
