@@ -1,4 +1,4 @@
-## :octocat: Github Explorer
+## :octocat: Githuber
 
 This is a simple application to search and find github users, and add them to a list.
 
